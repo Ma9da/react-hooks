@@ -1,11 +1,15 @@
 import { useState } from "react";
+import useForm from './useForm';
 
 function App() {
-  // gets fired on rerendring
+  // useState
   const [count, setCount] = useState(0);
   const [{ count1, count2 }, setCounts] = useState({ count1: 10, count2: 15 })
+  // custome Hook
+  const [values, handelChange] = useForm({ name: "", password: "" })
   return (
     <>
+      {/* <!-- ========== Start useState Hook ========== -->     */}
       <button onClick={() => { setCount((currentCount) => currentCount + 1) }}>increament</button>
       <p>{count}</p>
       <p>count 1: {count1}</p>
@@ -28,8 +32,24 @@ function App() {
         ))
       }}
       >
-      increment count 2
-    </button>
+        increment count 2
+      </button>
+      <br />
+      <br />
+      {/* <!-- ========== Start custome hook ========== -->     */}
+      <form>
+        <label htmlFor="name">User name:</label> <br />
+        <input type="text" name="name" id="name"
+          value={values.name}
+          onChange={handelChange}
+        />
+        <br />
+        <label htmlFor="pass">Password:</label> <br />
+        <input type="password" name="pass" id="pass"
+          value={values.password}
+          onChange={handelChange}
+        />
+      </form>
     </>
   );
 }
