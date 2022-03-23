@@ -74,7 +74,7 @@ function App() {
         />
       </form>
       {/* <!-- ========== Start useEffect hook ========== -->     */}
-      <div>{!data ? 'loading...' : data}</div>
+      <p>{!data ? 'loading...' : data}</p>
       {/* <!-- ========== Start useEffect hook ========== -->     */}
       <br />
       <br />

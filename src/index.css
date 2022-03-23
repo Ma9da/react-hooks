@@ -1,0 +1,56 @@
+button{
+  border:none;
+  padding:5px 10px;
+  color: white;
+  background-color: black;
+  font-weight: bold;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  cursor: pointer;
+}
+button:hover,
+button:focus{
+  color: black;
+  background-color: white;
+  border: 3px solid black;
+}
+form{
+  border: 3px solid;
+  width: 50%;
+  text-align: left;
+  margin: auto;
+  padding: 20px;
+  margin: 15px;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+}
+input[type=text],
+input[type=password]{
+  width: 100%;
+  border: 2px solid black;
+}
+input[type=text]:hover,
+input[type=text]:focus,
+input[type=password]:hover,
+input[type=password]:focus{
+  border-bottom: 5px solid black;
+}
+label{
+  font-size: 18px;
+}
+p{
+  display: table;
+  border: 2px solid;
+  padding: 10px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
