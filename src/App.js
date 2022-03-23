@@ -12,17 +12,17 @@ function App() {
   // custome Hook
   const [values, handelChange] = useForm({ name: "", password: "" })
   // useEffect
-  // useEffect(() => {
-  //   const onMouseMove = (e) => {
-  //     console.log(e);
-  //   }
-  //   // mount add +
-  //   window.addEventListener('mousemove', onMouseMove)
-  //   // unmount cleanup -
-  //   return () => {
-  //     window.removeEventListener('mousemove', onMouseMove)
-  //   }
-  // }, []);
+  useEffect(() => {
+    const onMouseMove = (e) => {
+      console.log(e);
+    }
+    // mount add +
+    window.addEventListener('mousemove', onMouseMove)
+    // unmount cleanup -
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove)
+    }
+  }, []);
   const { data } = useFetch(`http://numbersapi.com/${count ? count : 0}`)
   useEffect(() => {
     localStorage.setItem("count", JSON.stringify(count))
