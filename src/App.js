@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useForm from './useForm';
 import useFetch from './useFetch';
+import Hello from "./Hello";
 
 function App() {
   // useState
@@ -11,21 +12,24 @@ function App() {
   // custome Hook
   const [values, handelChange] = useForm({ name: "", password: "" })
   // useEffect
-  useEffect(() => {
-    const onMouseMove = (e) => {
-      console.log(e);
-    }
-    // mount add +
-    window.addEventListener('mousemove', onMouseMove)
-    // unmount cleanup -
-    return () => {
-      window.removeEventListener('mousemove', onMouseMove)
-    }
-  }, []);
+  // useEffect(() => {
+  //   const onMouseMove = (e) => {
+  //     console.log(e);
+  //   }
+  //   // mount add +
+  //   window.addEventListener('mousemove', onMouseMove)
+  //   // unmount cleanup -
+  //   return () => {
+  //     window.removeEventListener('mousemove', onMouseMove)
+  //   }
+  // }, []);
   const { data } = useFetch(`http://numbersapi.com/${count ? count : 0}`)
   useEffect(() => {
     localStorage.setItem("count", JSON.stringify(count))
   }, [count])
+  // useRef
+  const inputRef = useRef()
+  const [showHello, setShowHello] = useState(true)
   return (
     <>
       {/* <!-- ========== Start useState Hook ========== -->     */}
@@ -71,6 +75,16 @@ function App() {
       </form>
       {/* <!-- ========== Start useEffect hook ========== -->     */}
       <div>{!data ? 'loading...' : data}</div>
+      {/* <!-- ========== Start useEffect hook ========== -->     */}
+      <br />
+      <br />
+      <label htmlFor="bubbles">bubbles:</label>
+      <input ref={inputRef} type="checkbox" name="bubbles" id="bubbles" />
+      <button onClick={() => inputRef.current.checked = true}>check bubbles</button>
+      <br />
+      {showHello && <Hello />}
+      <br />
+      <button onClick={() => setShowHello(!showHello)}>toggle</button>
     </>
   );
 }
