@@ -1,12 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useForm from './useForm';
+import useFetch from './useFetch';
 
 function App() {
   // useState
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(() =>
+    JSON.parse(localStorage.getItem("count")
+    ));
   const [{ count1, count2 }, setCounts] = useState({ count1: 10, count2: 15 })
   // custome Hook
   const [values, handelChange] = useForm({ name: "", password: "" })
+  // useEffect
+  useEffect(() => {
+    const onMouseMove = (e) => {
+      console.log(e);
+    }
+    // mount add +
+    window.addEventListener('mousemove', onMouseMove)
+    // unmount cleanup -
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove)
+    }
+  }, []);
+  const { data } = useFetch(`http://numbersapi.com/${count ? count : 0}`)
+  useEffect(() => {
+    localStorage.setItem("count", JSON.stringify(count))
+  }, [count])
   return (
     <>
       {/* <!-- ========== Start useState Hook ========== -->     */}
@@ -44,12 +63,14 @@ function App() {
           onChange={handelChange}
         />
         <br />
-        <label htmlFor="pass">Password:</label> <br />
-        <input type="password" name="pass" id="pass"
+        <label htmlFor="password">Password:</label> <br />
+        <input type="password" name="password" id="password"
           value={values.password}
           onChange={handelChange}
         />
       </form>
+      {/* <!-- ========== Start useEffect hook ========== -->     */}
+      <div>{!data ? 'loading...' : data}</div>
     </>
   );
 }
