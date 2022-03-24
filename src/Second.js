@@ -20,6 +20,7 @@ const Second = () => {
         );
         return longestWord
     },[])
+    // eslint-disable-next-line no-unused-vars
     const longestWord = useMemo(() => computeLongestWord(data), [data, computeLongestWord])
     return (
         <>

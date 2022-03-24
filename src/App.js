@@ -4,6 +4,7 @@ import useFetch from './useFetch';
 import Hello from "./Hello";
 import useMeasure from './useMeasure';
 import Second from "./Second";
+import Third from "./Third";
 
 function App() {
   // useState
@@ -96,6 +97,7 @@ function App() {
       <br />
       <button onClick={() => setShowHello(!showHello)}>toggle</button>
       <Second />
+      <Third/>
     </>
   );
 }
