@@ -52,3 +52,9 @@ p{
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
 }
+pre{
+  font-weight: bold;
+  background: black;
+  color: white;
+  display: initial;
+}
