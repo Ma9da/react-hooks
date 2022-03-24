@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import useForm from './useForm';
 import useFetch from './useFetch';
 import Hello from "./Hello";
+import useMeasure from './useMeasure';
 
 function App() {
   // useState
@@ -12,17 +13,17 @@ function App() {
   // custome Hook
   const [values, handelChange] = useForm({ name: "", password: "" })
   // useEffect
-  useEffect(() => {
-    const onMouseMove = (e) => {
-      console.log(e);
-    }
-    // mount add +
-    window.addEventListener('mousemove', onMouseMove)
-    // unmount cleanup -
-    return () => {
-      window.removeEventListener('mousemove', onMouseMove)
-    }
-  }, []);
+  // useEffect(() => {
+  //   const onMouseMove = (e) => {
+  //     console.log(e);
+  //   }
+  //   // mount add +
+  //   window.addEventListener('mousemove', onMouseMove)
+  //   // unmount cleanup -
+  //   return () => {
+  //     window.removeEventListener('mousemove', onMouseMove)
+  //   }
+  // }, []);
   const { data } = useFetch(`http://numbersapi.com/${count ? count : 0}`)
   useEffect(() => {
     localStorage.setItem("count", JSON.stringify(count))
@@ -30,11 +31,17 @@ function App() {
   // useRef
   const inputRef = useRef()
   const [showHello, setShowHello] = useState(true)
+  // useLayoutEffect
+  useLayoutEffect(() => {
+    console.log(inputRef.current.getBoundingClientRect());
+  }, [])
+  const pRef = useRef()
+  const rect = useMeasure(pRef, [data])
   return (
     <>
       {/* <!-- ========== Start useState Hook ========== -->     */}
-      <button onClick={() => { setCount((currentCount) => currentCount + 1) }}>increament</button>
       <p>{count}</p>
+      <button onClick={() => { setCount((currentCount) => currentCount + 1) }}>increament</button>
       <p>count 1: {count1}</p>
       <button onClick={() => {
         setCounts(currentState => ({
@@ -74,7 +81,9 @@ function App() {
         />
       </form>
       {/* <!-- ========== Start useEffect hook ========== -->     */}
-      <p>{!data ? 'loading...' : data}</p>
+      <p ref={pRef}>{!data ? 'loading...' : data}</p>
+      {/* <!-- ========== Start useLayoutEffect hook ========== -->     */}
+      <pre>{JSON.stringify(rect, null, 2)}</pre>
       {/* <!-- ========== Start useEffect hook ========== -->     */}
       <br />
       <br />
