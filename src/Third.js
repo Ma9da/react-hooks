@@ -35,7 +35,8 @@ const Third = () => {
                     setText("");
                 }}
             >
-                <input value={text} onChange={e => setText(e.target.value)} />
+                <h1>write a todo:</h1>
+                <input type="text" value={text} onChange={e => setText(e.target.value)} />
             </form>
             <div>number of todos: {todoCount}</div>
             {todos.map((t, idx) => (
