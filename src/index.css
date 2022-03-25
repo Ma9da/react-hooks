@@ -61,3 +61,18 @@ pre{
 span{
   padding: 10px;
 }
+ul{
+  display: flex;
+  list-style-type: none;
+}
+nav{
+  border-bottom: 5px solid;
+}
+a{
+  color: black;
+  text-transform: capitalize;
+  margin: 0 10px;
+  font-weight: bold;
+  padding: 10px;
+  text-decoration: none;
+}
